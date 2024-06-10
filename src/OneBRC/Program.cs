@@ -4,7 +4,7 @@ using OneBRC;
 var stopwatch = Stopwatch.StartNew();
 
 var filePath = Path.GetFullPath(args[0]);
-var impl = new RandomAccessMultiThreadedImpl(filePath);
+var impl = new MemoryMappedFileImpl(filePath);
 // var impl = new StreamImpl(filePath);
 var task = impl.Run();
 

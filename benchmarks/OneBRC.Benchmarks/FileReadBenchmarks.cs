@@ -43,7 +43,7 @@ public class FileReadBenchmarks
         return d.Count;
     }
 
-    [Benchmark]
+    // [Benchmark]
     public int StreamKeyKey()
     {
         var impl = new StreamKeyKeyImpl(FilePath);
@@ -51,7 +51,7 @@ public class FileReadBenchmarks
         return d.Count;
     }
 
-    [Benchmark]
+    // [Benchmark]
     public int RandomAccess()
     {
         var impl = new RandomAccessImpl(FilePath);
@@ -59,7 +59,7 @@ public class FileReadBenchmarks
         return d.Count;
     }
 
-    [Benchmark]
+    // [Benchmark]
     public int RandomAccessMultiThreaded()
     {
         var impl = new RandomAccessMultiThreadedImpl(FilePath);
@@ -67,10 +67,18 @@ public class FileReadBenchmarks
         return d.Count;
     }
 
-    [Benchmark]
+    // [Benchmark]
     public int RandomAccessMultiThreadedLocalDict()
     {
         var impl = new RandomAccessMultiThreadedLocalDictImpl(FilePath);
+        var d = impl.Run().Result;
+        return d.Count;
+    }
+    
+    [Benchmark]
+    public int MemoryMappedFile()
+    {
+        var impl = new MemoryMappedFileImpl(FilePath);
         var d = impl.Run().Result;
         return d.Count;
     }
