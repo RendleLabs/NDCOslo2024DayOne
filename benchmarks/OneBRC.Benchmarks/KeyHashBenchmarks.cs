@@ -2,6 +2,7 @@
 
 namespace OneBRC.Benchmarks;
 
+[DisassemblyDiagnoser]
 public class KeyHashBenchmarks
 {
     private static readonly byte[][] Data =

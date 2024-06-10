@@ -3,7 +3,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace OneBRC.Benchmarks;
 
-[MemoryDiagnoser]
+[MemoryDiagnoser, ThreadingDiagnoser]
 public class FileReadBenchmarks
 {
     private static readonly string FilePath = Path.Combine(
@@ -19,7 +19,7 @@ public class FileReadBenchmarks
         return d.Count;
     }
 
-    [Benchmark]
+    // [Benchmark]
     public int Stream()
     {
         var impl = new StreamImpl(FilePath);
@@ -35,7 +35,7 @@ public class FileReadBenchmarks
         return d.Count;
     }
 
-    [Benchmark]
+    // [Benchmark]
     public int StreamLongKey()
     {
         var impl = new StreamLongKeyImpl(FilePath);
@@ -47,6 +47,22 @@ public class FileReadBenchmarks
     public int StreamKeyKey()
     {
         var impl = new StreamKeyKeyImpl(FilePath);
+        var d = impl.Run().Result;
+        return d.Count;
+    }
+
+    [Benchmark]
+    public int RandomAccess()
+    {
+        var impl = new RandomAccessImpl(FilePath);
+        var d = impl.Run().Result;
+        return d.Count;
+    }
+
+    [Benchmark]
+    public int RandomAccessMultiThreaded()
+    {
+        var impl = new RandomAccessMultiThreadedImpl(FilePath);
         var d = impl.Run().Result;
         return d.Count;
     }

@@ -2,7 +2,7 @@ namespace OneBRC.Shared;
 
 public class Accumulator
 {
-    public string City { get; }
+    public string? City { get; private set; }
     private float _total;
     private int _count;
     private float _min = float.MaxValue;
@@ -11,6 +11,10 @@ public class Accumulator
     public Accumulator(string city)
     {
         City = city;
+    }
+
+    public Accumulator()
+    {
     }
 
     public void Record(float value)
@@ -25,4 +29,9 @@ public class Accumulator
     public float Min => _min;
     public float Max => _max;
     public int Count => _count;
+
+    public void SetCity(string city)
+    {
+        City = city;
+    }
 }
