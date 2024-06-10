@@ -14,8 +14,6 @@ public class StreamReaderImpl
 
     public ValueTask<Dictionary<string, Accumulator>> Run()
     {
-        int count = 0;
-        var stopwatch = Stopwatch.StartNew();
         var dictionary = new Dictionary<string, Accumulator>();
         using var reader = File.OpenText(_filePath);
 
@@ -32,18 +30,8 @@ public class StreamReaderImpl
             }
             accumulator.Record(value);
 
-            if (++count % 1000000 == 0)
-            {
-                Console.WriteLine($"{count} lines done...");
-            }
-            
             line = reader.ReadLine();
         }
-
-        
-        stopwatch.Stop();
-        Console.WriteLine();
-        Console.WriteLine(stopwatch.Elapsed);
 
         return new ValueTask<Dictionary<string, Accumulator>>(dictionary);
     }
