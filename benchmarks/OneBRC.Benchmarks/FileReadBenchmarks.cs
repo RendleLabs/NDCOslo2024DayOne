@@ -3,7 +3,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace OneBRC.Benchmarks;
 
-[MemoryDiagnoser, ThreadingDiagnoser]
+[MemoryDiagnoser]
 public class FileReadBenchmarks
 {
     private static readonly string FilePath = Path.Combine(
@@ -63,6 +63,14 @@ public class FileReadBenchmarks
     public int RandomAccessMultiThreaded()
     {
         var impl = new RandomAccessMultiThreadedImpl(FilePath);
+        var d = impl.Run().Result;
+        return d.Count;
+    }
+
+    [Benchmark]
+    public int RandomAccessMultiThreadedLocalDict()
+    {
+        var impl = new RandomAccessMultiThreadedLocalDictImpl(FilePath);
         var d = impl.Run().Result;
         return d.Count;
     }

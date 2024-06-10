@@ -25,6 +25,14 @@ public class Accumulator
         ++_count;
     }
 
+    public void Combine(Accumulator other)
+    {
+        if (other._min < _min) _min = other._min;
+        if (other._max > _max) _max = other._max;
+        _total += other._total;
+        _count += other._count;
+    }
+
     public float Mean => _total / _count;
     public float Min => _min;
     public float Max => _max;
