@@ -42,4 +42,12 @@ public class FileReadBenchmarks
         var d = impl.Run().Result;
         return d.Count;
     }
+
+    [Benchmark]
+    public int StreamKeyKey()
+    {
+        var impl = new StreamKeyKeyImpl(FilePath);
+        var d = impl.Run().Result;
+        return d.Count;
+    }
 }
