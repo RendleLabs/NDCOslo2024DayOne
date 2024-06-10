@@ -1,13 +1,15 @@
 ﻿using System.Text;
+using CommunityToolkit.HighPerformance.Buffers;
 using OneBRC.Shared;
 
 namespace OneBRC;
 
-public class StreamImpl
+public class StreamStringPoolImpl
 {
+    private static readonly StringPool KeyPool = new StringPool(256);
     private readonly string _filePath;
 
-    public StreamImpl(string filePath)
+    public StreamStringPoolImpl(string filePath)
     {
         _filePath = filePath;
     }
@@ -57,7 +59,8 @@ public class StreamImpl
         var name = span.Slice(0, semicolon);
         var reading = span.Slice(semicolon + 1);
 
-        var key = Encoding.UTF8.GetString(name);
+        var key = KeyPool.GetOrAdd(name, Encoding.UTF8);
+        
         var value = float.Parse(reading);
         if (!aggregate.TryGetValue(key, out var accumulator))
         {

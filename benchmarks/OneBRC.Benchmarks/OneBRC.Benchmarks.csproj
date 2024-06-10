@@ -15,4 +15,10 @@
     <ProjectReference Include="..\..\src\OneBRC\OneBRC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="million.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

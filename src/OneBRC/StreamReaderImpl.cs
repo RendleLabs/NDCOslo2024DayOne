@@ -12,7 +12,7 @@ public class StreamReaderImpl
         _filePath = filePath;
     }
 
-    public ValueTask Run()
+    public ValueTask<Dictionary<string, Accumulator>> Run()
     {
         int count = 0;
         var stopwatch = Stopwatch.StartNew();
@@ -40,15 +40,11 @@ public class StreamReaderImpl
             line = reader.ReadLine();
         }
 
-        foreach (var accumulator in dictionary.Values.OrderBy(a => a.City))
-        {
-            Console.WriteLine($"{accumulator.City}: {accumulator.Min:F1}/{accumulator.Mean:F1}/{accumulator.Max:F1}");
-        }
         
         stopwatch.Stop();
         Console.WriteLine();
         Console.WriteLine(stopwatch.Elapsed);
 
-        return default;
+        return new ValueTask<Dictionary<string, Accumulator>>(dictionary);
     }
 }
