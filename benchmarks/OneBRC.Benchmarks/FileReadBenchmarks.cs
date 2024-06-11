@@ -82,4 +82,11 @@ public class FileReadBenchmarks
         var d = impl.Run().Result;
         return d.Count;
     }
+    
+    [Benchmark]
+    public int MemoryMappedFileIntegers()
+    {
+        var impl = new MemoryMappedFileIntegerImpl(FilePath);
+        return impl.Run().Count();
+    }
 }

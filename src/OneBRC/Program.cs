@@ -1,21 +1,22 @@
 ﻿using System.Diagnostics;
 using OneBRC;
 
+Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.RealTime;
+
 var stopwatch = Stopwatch.StartNew();
 
 var filePath = Path.GetFullPath(args[0]);
-var impl = new MemoryMappedFileImpl(filePath);
-// var impl = new StreamImpl(filePath);
-var task = impl.Run();
+var impl = new MemoryMappedFileIntegerImpl(filePath);
+var accumulators = impl.Run();
 
-if (!task.IsCompleted)
-{
-    await task;
-}
+// if (!task.IsCompleted)
+// {
+//     await task;
+// }
+//
+// var dictionary = task.Result;
 
-var dictionary = task.Result;
-
-foreach (var accumulator in dictionary.Values.OrderBy(a => a.City))
+foreach (var accumulator in accumulators.OrderBy(a => a.City))
 {
     Console.WriteLine($"{accumulator.City}: {accumulator.Min:F1}/{accumulator.Mean:F1}/{accumulator.Max:F1}");
 }
