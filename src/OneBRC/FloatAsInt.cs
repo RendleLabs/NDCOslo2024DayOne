@@ -1,10 +1,13 @@
 ﻿using System.Globalization;
+using System.Runtime.CompilerServices;
 
 namespace OneBRC;
 
 public static class FloatAsInt
 {
     private static readonly byte Separator = (byte)CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Parse(ReadOnlySpan<byte> span)
     {
         bool negative = span[0] == (byte)'-';

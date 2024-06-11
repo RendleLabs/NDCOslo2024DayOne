@@ -1,4 +1,5 @@
 ﻿using System.IO.MemoryMappedFiles;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using OneBRC.Shared;
@@ -50,6 +51,7 @@ internal class IntegerMemoryParser
         }
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void Run(ref ReadOnlySpan<byte> span, Dictionary<Key, IntAccumulator> dictionary)
     {
         int newline;

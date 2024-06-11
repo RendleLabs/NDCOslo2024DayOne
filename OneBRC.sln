@@ -19,6 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneBRC.Benchmarks", "benchmarks\OneBRC.Benchmarks\OneBRC.Benchmarks.csproj", "{9CC49BB3-F612-4B8F-BED3-80B557A09CB3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{2C49B326-2E5D-466E-9979-C14A6FD95D8E}"
+	ProjectSection(SolutionItems) = preProject
+		time_dotnet.ps1 = time_dotnet.ps1
+		time_native.ps1 = time_native.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
