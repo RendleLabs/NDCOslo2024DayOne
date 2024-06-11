@@ -8,17 +8,13 @@ public static class FloatAsInt
     private static readonly byte Separator = (byte)CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Parse(ReadOnlySpan<byte> span)
+    public static int Parse(in ReadOnlySpan<byte> span)
     {
         bool negative = span[0] == (byte)'-';
-        if (negative)
-        {
-            span = span.Slice(1);
-        }
 
         int value = 0;
 
-        for (int i = 0, l = span.Length; i < l; i++)
+        for (int i = negative ? 1 : 0, l = span.Length; i < l; i++)
         {
             if (span[i] != Separator)
             {

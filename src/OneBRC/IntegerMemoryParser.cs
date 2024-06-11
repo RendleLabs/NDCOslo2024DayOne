@@ -67,7 +67,7 @@ internal class IntegerMemoryParser
             }
             
             var number = line[(sc + 1)..];
-            var value = FloatAsInt.Parse(number);
+            var value = FloatAsInt.Parse(in number);
             
             var name = line[..sc];
             var key = KeyHash.ToKey(name);
